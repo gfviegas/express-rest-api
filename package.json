@@ -1,0 +1,47 @@
+{
+  "name": "express-rest-api",
+  "version": "1.0.0",
+  "description": "Express REST API sample",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gfviegas/express-rest-api.git"
+  },
+  "keywords": [
+    "express",
+    "es6",
+    "tdd",
+    "api",
+    "restful",
+    "mongoose"
+  ],
+  "author": "gfviegas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gfviegas/express-rest-api/issues"
+  },
+  "homepage": "https://github.com/gfviegas/express-rest-api#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "express-validator": "^3.0.0",
+    "extend": "^3.0.0",
+    "mongoose": "^4.7.2",
+    "morgan": "^1.7.0",
+    "validator": "^6.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "sinon": "^1.17.6",
+    "sinon-mongoose": "^1.3.0",
+    "standard": "^8.6.0"
+  }
+}
