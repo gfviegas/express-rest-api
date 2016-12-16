@@ -3,9 +3,11 @@ const server = {}
 
 server.start = (app) => {
   app.listen(port, () => {
-    console.log('------------------------------------------------------------')
-    console.log('Express server listening on port ' + port)
-    console.log('------------------------------------------------------------')
+    if (process.env.NODE_ENV === 'development') {
+      console.log('------------------------------------------------------------')
+      console.log('Express server listening on port ' + port)
+      console.log('------------------------------------------------------------')
+    }
   })
 }
 

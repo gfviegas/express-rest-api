@@ -16,7 +16,9 @@ const versions = ['v1']
 global._base = path.join(__dirname, '/')
 
 // Middlewares
-app.use(logger('dev'))
+if (app.get('env') === 'development') {
+  app.use(logger('dev'))
+}
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
@@ -36,3 +38,5 @@ versions.forEach((version) => {
 
 // Start server
 server.start(app)
+
+module.exports = app
