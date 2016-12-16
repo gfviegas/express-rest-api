@@ -4,9 +4,8 @@
   "description": "Express REST API sample",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
     "test": "npm run test:integration && npm run test:unit",
+    "start": "nodemon index.js",
     "test:integration": "mocha tests/integration/**/*.spec.js",
     "test:unit": "whoami"
   },
@@ -37,6 +36,7 @@
     "extend": "^3.0.0",
     "mongoose": "^4.7.2",
     "morgan": "^1.7.0",
+    "rfr": "^1.2.3",
     "validator": "^6.2.0"
   },
   "devDependencies": {

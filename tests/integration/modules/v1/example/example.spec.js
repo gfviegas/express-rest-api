@@ -1,9 +1,10 @@
+const rfr = require('rfr')
 const request = require('supertest')
 const chai = require('chai')
 const expect = chai.expect
 
-const exampleModel = require('../../../../../modules/v1/example/model').model
-const app = require('../../../../config/app')
+const exampleModel = rfr('./modules/v1/example/model').model
+const app = rfr('./tests/config/app')
 
 const testEntityValue = (example) => {
   expect(example).to.be.an('object')
