@@ -1,5 +1,5 @@
-const path = require('path')
-const handleValidation = require(path.join(global._base, '/helpers/validation'))
+const rfr = require('rfr')
+const handleValidation = rfr('/helpers/validation')
 
 const nameValidators = (req) => {
   req.checkBody('name', {error: 'required'}).notEmpty()
@@ -9,7 +9,6 @@ const emailValidators = (req) => {
   req.checkBody('email', {error: 'required'}).notEmpty()
   req.checkBody('email', {error: 'invalid'}).isEmail()
 }
-
 const userValidator = (req) => {
   nameValidators(req)
   emailValidators(req)
@@ -25,6 +24,7 @@ module.exports = {
     handleValidation(req, res, next)
   },
   update: (req, res, next) => {
-    // To validate
+    req.checkBody('name', {error: 'length', min: 4, max: 20}).len(4, 20)
+    req.checkBody('email', {error: 'invalid'}).isEmail()
   }
 }
