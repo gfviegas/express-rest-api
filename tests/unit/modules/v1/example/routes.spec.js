@@ -3,8 +3,8 @@ const chai = require('chai')
 const expect = chai.expect
 
 const moduleRoutes = rfr('./modules/v1/example/routes')
-const routesHelper = rfr('./tests/helpers/routes')
-const routes = routesHelper.routes(moduleRoutes)
+const routesHelper = rfr('./tests/helpers/routes')(moduleRoutes)
+const routes = routesHelper.getRoutes()
 
 describe('Module Example: Routes', () => {
   describe('HEAD', () => {
