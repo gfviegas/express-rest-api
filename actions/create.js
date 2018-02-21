@@ -6,7 +6,7 @@ module.exports = (Model) => {
     modelInstance.save((err, data) => {
       if (err) throw err
 
-      res.status(201).json(data)
+      res.status(201).json(modelInstance)
     })
   }
 }

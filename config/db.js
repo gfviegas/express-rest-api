@@ -1,21 +1,26 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
+const options = {
+  useMongoClient: true
+}
+
 if (process.env.NODE_ENV === 'test') {
-  mongoose.connect(process.env.DB_HOST_TEST)
+  mongoose.connect(process.env.DB_HOST_TEST, options)
 } else {
-  mongoose.connect(process.env.DB_HOST)
+  mongoose.connect(process.env.DB_HOST, options)
 }
 
 const db = mongoose.connection
 
-db.on('error', (err) => {
-  if (process.env.NODE_ENV === 'development') { console.log('DB connection error', err) }
-})
-
-db.on('open', () => {
-  if (process.env.NODE_ENV === 'development') { console.log('DB connection open') }
-})
+if (process.env.NODE_ENV === 'development') {
+  db.on('error', (err) => {
+    console.log('DB connection error', err)
+  })
+  db.on('open', () => {
+    console.log('DB connection open')
+  })
+}
 
 db.on('connected', (err) => {
   if (err) throw err

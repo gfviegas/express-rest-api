@@ -7,20 +7,19 @@ const routesHelper = rfr('./tests/helpers/routes')(moduleRoutes)
 const routes = routesHelper.getRoutes()
 
 describe('Modules V1: Routes', () => {
-  console.log(routes)
   describe('HEAD', () => {
     it('should not have any HEAD routes', () => {
       expect(routes.head.length).to.equal(0)
     })
   })
   describe('GET', () => {
-    it('should have a GET /test route', () => {
-      expect(routesHelper.checkRoute('get', '/test')).to.be.true
+    it('should not have any GET routes', () => {
+      expect(routes.get.length).to.equal(0)
     })
   })
   describe('POST', () => {
-    it('should not have any POST routes', () => {
-      expect(routes.post.length).to.equal(0)
+    it('should have a POST /test routes', () => {
+      expect(routesHelper.checkRoute('post', '/test')).to.be.true
     })
   })
   describe('PUT', () => {

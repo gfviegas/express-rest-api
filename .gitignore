@@ -38,3 +38,12 @@ jspm_packages
 
 # Other stuff
 .DS_Store
+public/files/**/*
+!public/**/no_image.*
+tmp/*
+deploy.sh
+
+
+
+!.gitkeep
+!**/.gitkeep

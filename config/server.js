@@ -1,4 +1,9 @@
-const port = process.env.PORT || 8080
+let port = process.env.PORT || 8080
+
+if (process.env.NODE_ENV === 'test') {
+  port = process.env.PORT_TEST
+}
+
 const server = {}
 
 server.start = (app) => {

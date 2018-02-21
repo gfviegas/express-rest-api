@@ -1,0 +1,12 @@
+table
+  thead
+    tr
+      th Teste
+      th Teste 2
+  tbody
+    tr #[td Teste] #[td Teste 2]
+    tr #[td Teste] #[td Teste 2]
+    tr #[td Teste] #[td Teste 2]
+    tr #[td Teste] #[td Teste 2]
+    //- each post, i in data
+    //-   tr(class=(i % 2 == 0) ? 'odd' : 'even'): a(href='/admin/post/' + post.id) #{post.author} - #{post.title}

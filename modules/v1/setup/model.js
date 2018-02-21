@@ -1,18 +1,26 @@
 const mongoose = require('mongoose')
-const modelName = 'example'
+const modelName = 'setup'
 
 const structure = {
-  name: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  }
+  data: [{
+    label: {
+      required: true,
+      type: String
+    },
+    key: {
+      unique: true,
+      required: true,
+      type: String
+    },
+    value: {
+      required: true,
+      type: String
+    }
+  }]
 }
 
 const options = {
+  strict: false,
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at'

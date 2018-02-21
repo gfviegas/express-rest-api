@@ -3,7 +3,12 @@ module.exports = (Model) => {
     const id = {_id: req.params.id}
     Model.findById(id, (err, data) => {
       if (err) throw err
-      res.status(200).json(data)
+
+      if (data) {
+        res.status(200).json(data)
+      } else {
+        res.status(404).json({})
+      }
     })
   }
 }

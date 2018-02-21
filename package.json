@@ -1,18 +1,19 @@
 {
   "name": "express-rest-api",
-  "version": "1.0.0",
-  "description": "Express REST API sample",
+  "version": "1.1.0",
+  "description": "Express REST API",
   "main": "index.js",
   "scripts": {
     "test": "npm run test:integration && npm run test:unit",
     "start": "nodemon index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
+    "dev-win": "NODE_ENV=development nodemon -L index.js",
+    "prod": "NODE_ENV=production nodemon index.js",
+    "seed": "node seeds/index.js",
     "test:integration": "mocha tests/integration/**/*.spec.js",
     "test:unit": "mocha tests/unit/**/*.spec.js",
+    "test-server:unit": "mocha tests/unit/**/*.spec.js --watch",
     "test:report": "nyc --reporter=html --reporter=text mocha tests/**/*.spec.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gfviegas/express-rest-api.git"
   },
   "keywords": [
     "express",
@@ -23,25 +24,39 @@
     "mongoose"
   ],
   "author": "gfviegas",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gfviegas/express-rest-api/issues"
-  },
-  "homepage": "https://github.com/gfviegas/express-rest-api#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.15.2",
-    "cors": "^2.8.1",
+    "busboy": "^0.2.14",
+    "bytes": "^2.0.0",
+    "concat-stream": "^1.4.6",
+    "cors": "^2.8.4",
+    "debug": "^2.1.0",
     "dotenv": "^2.0.0",
-    "express": "^4.14.0",
-    "express-validator": "^3.0.0",
+    "emailjs": "^1.0.12",
+    "express": "^4.15.4",
+    "express-validator": "4.2.1",
     "extend": "^3.0.0",
-    "mongoose": "^4.7.2",
+    "fb": "^1.1.1",
+    "jimp": "^0.2.27",
+    "jsonwebtoken": "^7.4.3",
+    "moment": "^2.18.1",
+    "mongo-dot-notation": "^1.2.0",
+    "mongoose": "^4.11.8",
+    "mongoose-bcrypt": "^1.4.2",
     "morgan": "^1.7.0",
+    "multer": "^1.3.0",
+    "pug": "^2.0.0-rc.3",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0",
     "rfr": "^1.2.3",
-    "validator": "^6.2.0"
+    "tempy": "^0.2.0",
+    "util": "^0.10.3",
+    "validator": "^8.1.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chalk": "^1.1.3",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
@@ -50,5 +65,14 @@
     "sinon-mongoose": "^1.3.0",
     "standard": "^8.6.0",
     "supertest": "^2.0.1"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "expect",
+      "beforeEach",
+      "afterEach"
+    ]
   }
 }

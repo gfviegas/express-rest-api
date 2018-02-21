@@ -3,9 +3,9 @@ const chai = require('chai')
 const expect = chai.expect
 
 const request = rfr('./tests/helpers/request')
-const validators = rfr('./modules/v1/example/validators')
+const validators = rfr('./modules/v1/user/validators')
 
-describe('Module Example: Validators', () => {
+describe('Module User: Validators', () => {
   let req
   let checkBody
   let notEmpty
@@ -31,27 +31,27 @@ describe('Module Example: Validators', () => {
   })
 
   it('should have all the required methods registred', () => {
-    expect(validators).to.contain.all.keys(['create', 'replace', 'update'])
+    expect(validators).to.contain.all.keys(['create', 'replace', 'update', 'email', 'uniqueEmailValidator'])
   })
 
   describe('Method Create', () => {
     beforeEach(() => {
-      validators.create(req, request.res, {})
+      validators.create(req, request.res, () => {})
     })
     it('should be a function', () => {
       expect(validators.create).to.be.a('function')
     })
-    it('should call checkBody 4 times', () => {
+    it('should call checkBody 6 times', () => {
       expect(checkBody.called).to.be.true
-      expect(checkBody.callCount).to.equal(4)
+      expect(checkBody.callCount).to.equal(6)
     })
-    it('should call len once', () => {
+    it('should call len 2 times', () => {
       expect(len.called).to.be.true
-      expect(len.callCount).to.equal(1)
+      expect(len.callCount).to.equal(2)
     })
-    it('should call notEmpty twice', () => {
+    it('should call notEmpty 3 times', () => {
       expect(notEmpty.called).to.be.true
-      expect(notEmpty.callCount).to.equal(2)
+      expect(notEmpty.callCount).to.equal(3)
     })
     it('should call isEmail once', () => {
       expect(isEmail.called).to.be.true
@@ -68,27 +68,33 @@ describe('Module Example: Validators', () => {
     })
     it('should verify email valid', () => {
       expect(checkBody.calledWith('email', {error: 'invalid'})).to.be.true
+    })
+    it('should verify password required', () => {
+      expect(checkBody.calledWith('password', {error: 'required'})).to.be.true
+    })
+    it('should verify password length', () => {
+      expect(checkBody.calledWith('password', {error: 'length', min: 6, max: 20})).to.be.true
     })
   })
 
   describe('Method Replace', () => {
     beforeEach(() => {
-      validators.replace(req, request.res, {})
+      validators.replace(req, request.res, () => {})
     })
     it('should be a function', () => {
       expect(validators.create).to.be.a('function')
     })
-    it('should call checkBody 4 times', () => {
+    it('should call checkBody 6 times', () => {
       expect(checkBody.called).to.be.true
-      expect(checkBody.callCount).to.equal(4)
+      expect(checkBody.callCount).to.equal(6)
     })
-    it('should call len once', () => {
+    it('should call len 2 times', () => {
       expect(len.called).to.be.true
-      expect(len.callCount).to.equal(1)
+      expect(len.callCount).to.equal(2)
     })
-    it('should call notEmpty twice', () => {
+    it('should call notEmpty 3 times', () => {
       expect(notEmpty.called).to.be.true
-      expect(notEmpty.callCount).to.equal(2)
+      expect(notEmpty.callCount).to.equal(3)
     })
     it('should call isEmail once', () => {
       expect(isEmail.called).to.be.true
@@ -106,11 +112,17 @@ describe('Module Example: Validators', () => {
     it('should verify email valid', () => {
       expect(checkBody.calledWith('email', {error: 'invalid'})).to.be.true
     })
+    it('should verify password required', () => {
+      expect(checkBody.calledWith('password', {error: 'required'})).to.be.true
+    })
+    it('should verify password length', () => {
+      expect(checkBody.calledWith('password', {error: 'length', min: 6, max: 20})).to.be.true
+    })
   })
 
   describe('Method Update', () => {
     beforeEach(() => {
-      validators.update(req, request.res, {})
+      validators.update(req, request.res, () => {})
     })
     it('should be a function', () => {
       expect(validators.create).to.be.a('function')
@@ -129,6 +141,29 @@ describe('Module Example: Validators', () => {
     })
     it('should verify name length', () => {
       expect(checkBody.calledWith('name', {error: 'length', min: 4, max: 20})).to.be.true
+    })
+    it('should verify email valid', () => {
+      expect(checkBody.calledWith('email', {error: 'invalid'})).to.be.true
+    })
+  })
+
+  describe('Method Email', () => {
+    beforeEach(() => {
+      validators.email(req, request.res, () => {})
+    })
+    it('should be a function', () => {
+      expect(validators.create).to.be.a('function')
+    })
+    it('should call checkBody twice', () => {
+      expect(checkBody.called).to.be.true
+      expect(checkBody.callCount).to.equal(2)
+    })
+    it('should call isEmail once', () => {
+      expect(isEmail.called).to.be.true
+      expect(isEmail.callCount).to.equal(1)
+    })
+    it('should verify email required', () => {
+      expect(checkBody.calledWith('email', {error: 'required'})).to.be.true
     })
     it('should verify email valid', () => {
       expect(checkBody.calledWith('email', {error: 'invalid'})).to.be.true

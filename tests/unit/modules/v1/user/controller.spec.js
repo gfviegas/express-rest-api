@@ -2,16 +2,16 @@ const rfr = require('rfr')
 const chai = require('chai')
 const expect = chai.expect
 
-const controller = rfr('./modules/v1/example/controller')
+const controller = rfr('./modules/v1/user/controller')
 
-describe('Module Example: Controller', () => {
+describe('Module User: Controller', () => {
   it('should have all routes required methods registred', () => {
-    expect(controller).to.contain.all.keys(['create', 'find', 'findById', 'findOneAndUpdate', 'update', 'remove', 'test'])
+    expect(controller).to.contain.all.keys(['create', 'find', 'findById', 'findOneAndUpdate', 'update', 'remove', 'checkExists'])
   })
 
-  describe('Method Test', () => {
+  describe('Method checkExists', () => {
     it('should be a function', () => {
-      expect(controller.test).to.be.a('function')
+      expect(controller.checkExists).to.be.a('function')
     })
 
     it('should send a valid response', () => {
@@ -26,7 +26,7 @@ describe('Module Example: Controller', () => {
         }
       }
 
-      controller.test({}, res)
+      controller.checkExists({}, res)
     })
   })
 })

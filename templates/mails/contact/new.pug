@@ -1,0 +1,33 @@
+extends ../base-layout.pug
+
+block append banner
+  td(bgcolor='#ffffff')
+    img.fluid(src=`${_email.imgPath}contact.jpg`, aria-hidden='true', width='680', height='', alt='alt_text', border='0', align='center', style='width: 100%; max-width: 680px; height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;')
+block append content
+  td(bgcolor='#ffffff')
+    table(role='presentation', aria-hidden='true', cellspacing='0', cellpadding='0', border='0', width='100%')
+      tr
+        td(style='padding: 40px; text-align: center; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;')
+          h2 Nova Mensagem - #{contactType}.
+          p.text-left Foi recebida uma nova mensagem ao setor "#{contactTarget}" através do formulário de contato da Região Escoteira de Minas Gerais.
+          p.text-left Para responder, você deve enviar um email diretamente ao autor atráves do email a ele fornecido: 
+            a(href=`mailto:${author.email}`) #{author.email}
+      tr
+        td(style='padding: 40px; text-align: left; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;')
+          h2 Dados da Solicitação:
+          p.text-left 
+            dd #[strong Tipo de Contato:] #{contactType}
+          p.text-left 
+            dd #[strong Setor Desejado:] #{contactTarget}
+          br
+          h2 Dados do(a) Solicitante:
+          p.text-left
+            dd #[strong Nome:] #{author.name}
+          p.text-left
+            dd #[strong Email:] #{author.email}
+          p.text-left
+            dd #[strong Grupo Escoteiro:] #{author.group.number} - #{author.group.name}
+          br
+          h2 Mensagem
+          p.text-left
+            dd #[strong Mensagem Enviada:] #{message}
