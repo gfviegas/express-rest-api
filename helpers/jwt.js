@@ -16,6 +16,21 @@ const getUserId = (req) => {
   return data.sub
 }
 
+const generateToken = (user) => {
+  const payload = {
+    sub: user.id,
+    data: {
+      name: user.name
+    }
+  }
+
+  const options = {
+    expiresIn: '1d'
+  }
+
+  return jwt.sign(payload, process.env.APP_SECRET, options)
+}
+
 const middleware = (req, res, next) => {
   const token = getTokenFromRequest(req)
   if (token && token.length > 0) {
@@ -40,5 +55,6 @@ module.exports = {
   getPayload,
   getUserId,
   getTokenFromRequest,
+  generateToken,
   middleware
 }

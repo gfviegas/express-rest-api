@@ -16,10 +16,6 @@ const structure = {
     required: true,
     unique: true
   },
-  cpf: {
-    type: String,
-    required: true
-  },
   password: {
     type: String,
     required: true,

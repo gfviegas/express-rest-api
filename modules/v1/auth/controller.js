@@ -2,7 +2,6 @@ const rfr = require('rfr')
 const actionsPath = './actions/'
 const Model = require('../user/model').model
 const extend = require('extend')
-const jwt = require('jsonwebtoken')
 const mailer = rfr('helpers/mailer')
 const jwtHelper = rfr('helpers/jwt')
 
@@ -28,19 +27,6 @@ const customMethods = {
         res.json(data)
       })
   },
-  generateToken: (user) => {
-    const payload = {
-      sub: user.id,
-      data: {
-        name: user.name
-      }
-    }
-    const options = {
-      expiresIn: '1d'
-    }
-
-    return jwt.sign(payload, process.env.APP_SECRET, options)
-  },
   authenticate: (req, res) => {
     const query = {$or: [{username: req.body.username}, {email: req.body.username}]}
     Model.findOne(query)
@@ -59,7 +45,7 @@ const customMethods = {
             if (!valid) {
               return res.status(422).json({error: 'wrong_credentials'})
             } else {
-              return res.status(200).json({token: customMethods.generateToken(user)})
+              return res.status(200).json({token: jwtHelper.generateToken(user)})
             }
           })
         }
