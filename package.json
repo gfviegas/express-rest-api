@@ -4,7 +4,7 @@
   "description": "Express REST API",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test:integration && npm run test:unit",
+    "test": "npm run lint && npm run test:unit && npm run test:integration",
     "start": "nodemon index.js",
     "dev": "NODE_ENV=development nodemon index.js",
     "dev-win": "NODE_ENV=development nodemon -L index.js",
@@ -12,8 +12,9 @@
     "prod": "NODE_ENV=production nodemon index.js",
     "seed": "node seeds/index.js",
     "test:integration": "mocha tests/integration/**/*.spec.js",
+    "test:integration-server": "mocha tests/integration/**/*.spec.js --watch",
     "test:unit": "mocha tests/unit/**/*.spec.js",
-    "test-server:unit": "mocha tests/unit/**/*.spec.js --watch",
+    "test:unit-server": "mocha tests/unit/**/*.spec.js --watch",
     "test:report": "nyc --reporter=html --reporter=text mocha tests/**/*.spec.js"
   },
   "keywords": [

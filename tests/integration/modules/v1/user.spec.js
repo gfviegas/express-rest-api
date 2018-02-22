@@ -3,8 +3,8 @@ const request = require('supertest')
 const chai = require('chai')
 const expect = chai.expect
 
-const exampleModel = rfr('./modules/v1/users/model').model
-const app = rfr('./tests/config/app')
+const exampleModel = rfr('modules/v1/user/model').model
+const app = rfr('tests/config/app')
 
 const ENDPOINT = 'api/v1/users'
 
