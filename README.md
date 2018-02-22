@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/gfviegas/scout-cms.svg?branch=master)](https://travis-ci.org/gfviegas/scout-cms)
-[![Dependency Status](https://gemnasium.com/badges/github.com/gfviegas/eric-api.svg)](https://gemnasium.com/github.com/gfviegas/eric-api)
+[![Build Status](https://travis-ci.org/gfviegas/scout-cms.svg?branch=master)](https://travis-ci.org/gfviegas/express-rest-api)
+[![Dependency Status](https://gemnasium.com/badges/github.com/gfviegas/express-rest-api.svg)](https://gemnasium.com/github.com/gfviegas/express-rest-api)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 # API RESTful em Express, Mongoose, Mocha e Chai.
 
