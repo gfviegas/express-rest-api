@@ -3,6 +3,27 @@
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 # API RESTful em Express, Mongoose, Mocha e Chai.
 
+# Scripts
+
+Os seguintes scripts estão disponiveis com `yarn run SCRIPT` ou `npm run SCRIPT`
+
+| Script | Descrição |
+| ------ | ------ |
+| test | Roda o linter, roda os testes unitários e os testes de integração, em sequência |
+| start | Inicia o servidor com hot auto-reload utilizando o nodemon |
+| dev | Inicia o servidor de desenvolvimento com hot auto-reload utilizando o nodemon |
+| dev-win | Inicia o servidor de desenvolvimento com hot auto-reload utilizando o nodemon em legacy mode para windows |
+| lint | Roda o ESLINT para conferir o styleguide do código |
+| prod | Inicia o servidor de produção com hot auto-reload utilizando o nodemon |
+| seed | Alimenta o banco de dados através das estratégias na pasta seed |
+| test:integration | Roda apenas os testes de integração, uma única vez |
+| test:integration-server | Inicia o servidor de desenvolvimento dos testes de integração, com auto-reload |
+| test:unit | Roda apenas os testes unitários, uma única vez |
+| test:unit-server | Inicia o servidor de desenvolvimento dos testes unitários, com auto-reload |
+| test:report | Gera o relatório de cobertura dos testes |
+
+# Sobre este boilerplate
+
 ## Organização de Pastas
 Vamos seguir um padrão de organização de pastas para ficar cada coisa em seu lugar e clean.
 
