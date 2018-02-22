@@ -21,10 +21,13 @@ const isMongoId = (req) => { return sinon.stub(req, 'isMongoId').returnsThis() }
 const isBoolean = (req) => { return sinon.stub(req, 'isBoolean').returnsThis() }
 const matches = (req) => { return sinon.stub(req, 'matches').returnsThis() }
 const getValidationResult = (req) => {
-  return sinon.stub(req, 'getValidationResult', () => {
+  return sinon.stub(req, 'getValidationResult').callsFake(() => {
     return new Promise((resolve, reject) => {
       resolve({
         array: () => {
+          return []
+        },
+        mapped: () => {
           return []
         },
         isEmpty: () => {
