@@ -31,9 +31,12 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker-compose --version
-  - docker-compose pull
-  - docker-compose build
-  - docker-compose start
+
+before_script:
+  - docker-compose up --build -d
 
 script:
   - docker-compose exec api yarn run test
+
+after_script:
+  - docker-compose down
