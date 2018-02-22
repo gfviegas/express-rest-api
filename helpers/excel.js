@@ -1,8 +1,7 @@
-// const tempy = require('tempy')
 const Excel = require('exceljs')
 
 const defaultWorkbookOptions = {
-  creator: 'ERP - i9xp',
+  creator: process.env.APP_DISPLAY_NAME,
   created: new Date(),
   modified: new Date()
 }
