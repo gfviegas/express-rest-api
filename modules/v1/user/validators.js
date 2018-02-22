@@ -64,22 +64,17 @@ const activeValidators = (req) => {
   req.checkBody('active', {error: 'required'}).notEmpty()
   req.checkBody('active', {error: 'invalid'}).isBoolean()
 }
-const cpfValidators = (req) => {
-  req.checkBody('cpf', {error: 'required'}).notEmpty()
-  req.checkBody('cpf', {error: 'invalid'}).matches(/[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}/)
-}
+
 const userValidator = (req) => {
   nameValidators(req)
   passwordValidators(req)
   activeValidators(req)
-  cpfValidators(req)
   emailValidators(req)
   usernameValidators(req)
 }
 
 module.exports = {
   create: (req, res, next) => {
-    req.checkBody('email', {error: 'invalid'}).matches(/[\w0-9.-]*@i9xp\.com\.br/)
     userValidator(req)
     handleValidation(req, res, next)
   },
@@ -88,11 +83,9 @@ module.exports = {
     handleValidation(req, res, next)
   },
   update: (req, res, next) => {
-    req.checkBody('email', {error: 'invalid'}).matches(/[\w0-9.-]*@i9xp\.com\.br/)
     req.checkBody('name', {error: 'length', min: 4, max: 20}).len(4, 20)
     req.checkBody('email', {error: 'invalid'}).isEmail()
     req.checkBody('username', {error: 'length', min: 4, max: 20}).len(4, 20)
-    req.checkBody('cpf', {error: 'invalid'}).matches(/[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}/)
     req.checkBody('active', {error: 'invalid'}).isBoolean()
     handleValidation(req, res, next)
   },

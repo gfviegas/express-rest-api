@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  mongo:
+    container_name: example-mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes_from:
+      - mongo_data
+
+  mongo_data:
+    container_name: example-mongo-data
+    image: tianon/true
+    volumes:
+      - ./tmp/db:/data/db
+      - ./tmp/backups:/data/backups
+
+  api:
+    image: node:8
+    container_name: example-api
+    working_dir: /var/www/app
+    command: bash -c 'yarn && yarn run dev'
+    volumes:
+      - ./:/var/www/app
+      - /var/www/app/node_modules
+    ports:
+      - 3000:3000
+    links:
+      - mongo
+    depends_on:
+      - mongo

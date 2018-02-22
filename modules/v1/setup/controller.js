@@ -68,10 +68,10 @@ const customMethods = {
       if (!modelInstance) res.status(404).json({error: 'setup_not_found'})
 
       modelInstance
-      .populate('last_updated_by', (err, setup) => {
-        if (err) throw err
-        res.status(200).json(setup)
-      })
+        .populate('last_updated_by', (err, setup) => {
+          if (err) throw err
+          res.status(200).json(setup)
+        })
     })
   },
   checkExists: (req, res) => {

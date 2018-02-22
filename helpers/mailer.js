@@ -28,7 +28,7 @@ const sendMail = (options) => {
     server.send(message, (error, info) => {
       if (error) {
         console.log(`[MAIL HELPER] Erro: ${JSON.stringify(error)}`)
-        return reject({success: false, error: error})
+        return reject(new Error({success: false, error: error}))
       }
       return resolve({success: true, info: info})
     })

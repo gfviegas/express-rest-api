@@ -6,6 +6,8 @@ const req = {
   len: () => {},
   isEmail: () => {},
   isMongoId: () => {},
+  isBoolean: () => {},
+  matches: () => {},
   isIn: () => {},
   getValidationResult: () => {}
 }
@@ -16,6 +18,8 @@ const len = (req) => { return sinon.stub(req, 'len').returnsThis() }
 const isEmail = (req) => { return sinon.stub(req, 'isEmail').returnsThis() }
 const isIn = (req) => { return sinon.stub(req, 'isIn').returnsThis() }
 const isMongoId = (req) => { return sinon.stub(req, 'isMongoId').returnsThis() }
+const isBoolean = (req) => { return sinon.stub(req, 'isBoolean').returnsThis() }
+const matches = (req) => { return sinon.stub(req, 'matches').returnsThis() }
 const getValidationResult = (req) => {
   return sinon.stub(req, 'getValidationResult', () => {
     return new Promise((resolve, reject) => {
@@ -47,6 +51,8 @@ module.exports = {
   stubLen: (req) => { return len(req) },
   stubIsEmail: (req) => { return isEmail(req) },
   stubIsMongoId: (req) => { return isMongoId(req) },
+  stubIsBoolean: (req) => { return isBoolean(req) },
+  stubMatches: (req) => { return matches(req) },
   stubIsIn: (req) => { return isIn(req) },
   stubGetValidationResult: (req) => { return getValidationResult(req) },
 

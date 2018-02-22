@@ -19,7 +19,7 @@ describe('Modules V1: Routes', () => {
   })
   describe('POST', () => {
     it('should have a POST /test routes', () => {
-      expect(routesHelper.checkRoute('post', '/test')).to.be.true
+      expect(routesHelper.checkRoute('post', '/test')).to.equal(true)
     })
   })
   describe('PUT', () => {

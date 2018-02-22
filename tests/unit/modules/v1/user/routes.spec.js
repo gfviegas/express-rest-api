@@ -14,18 +14,18 @@ describe('Module User: Routes', () => {
   })
   describe('GET', () => {
     it('should have a GET / route', () => {
-      expect(routesHelper.checkRoute('get', '/')).to.be.true
+      expect(routesHelper.checkRoute('get', '/')).to.equal(true)
     })
     it('should have a GET /:id route', () => {
-      expect(routesHelper.checkRoute('get', '/:id')).to.be.true
+      expect(routesHelper.checkRoute('get', '/:id')).to.equal(true)
     })
   })
   describe('POST', () => {
     it('should have a POST / route', () => {
-      expect(routesHelper.checkRoute('post', '/')).to.be.true
+      expect(routesHelper.checkRoute('post', '/')).to.equal(true)
     })
     it('should have a POST /email route', () => {
-      expect(routesHelper.checkRoute('post', '/email')).to.be.true
+      expect(routesHelper.checkRoute('post', '/email')).to.equal(true)
     })
   })
   describe('PUT', () => {
@@ -35,12 +35,12 @@ describe('Module User: Routes', () => {
   })
   describe('PATCH', () => {
     it('should have a PATCH /:id route', () => {
-      expect(routesHelper.checkRoute('patch', '/:id')).to.be.true
+      expect(routesHelper.checkRoute('patch', '/:id')).to.equal(true)
     })
   })
   describe('DELETE', () => {
     it('should have a DELETE /:id route', () => {
-      expect(routesHelper.checkRoute('delete', '/:id')).to.be.true
+      expect(routesHelper.checkRoute('delete', '/:id')).to.equal(true)
     })
   })
 })

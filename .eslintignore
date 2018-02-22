@@ -1,0 +1,2 @@
+tmp/**/*.js
+node_modules/**/*.js

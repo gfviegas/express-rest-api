@@ -22,7 +22,7 @@ describe('Module User: Controller', () => {
         json: (data) => {
           expect(data).to.be.a('object')
           expect(data).to.contain.all.keys(['tested'])
-          expect(data.tested).to.be.true
+          expect(data.tested).to.equal(true)
         }
       }
 
