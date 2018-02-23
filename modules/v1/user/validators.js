@@ -73,10 +73,10 @@ module.exports = {
     handleValidation(req, res, next)
   },
   update: (req, res, next) => {
-    if (req.body.name) req.checkBody('name', {error: 'length', min: 4, max: 20}).len(4, 20)
-    if (req.body.email) req.checkBody('email', {error: 'invalid'}).isEmail()
-    if (req.body.username) req.checkBody('username', {error: 'length', min: 4, max: 20}).len(4, 20)
-    if (req.body.active) req.checkBody('active', {error: 'invalid'}).isBoolean()
+    if (req.body && req.body.name) req.checkBody('name', {error: 'length', min: 4, max: 20}).len(4, 20)
+    if (req.body && req.body.email) req.checkBody('email', {error: 'invalid'}).isEmail()
+    if (req.body && req.body.username) req.checkBody('username', {error: 'length', min: 4, max: 20}).len(4, 20)
+    if (req.body && req.body.active) req.checkBody('active', {error: 'invalid'}).isBoolean()
     handleValidation(req, res, next)
   },
   email (req, res, next) {
