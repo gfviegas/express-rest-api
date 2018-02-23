@@ -7,7 +7,11 @@ module.exports = (Model) => {
   helper.getAuthorizedUser = (query) => {
     return Model.findOne(query)
   }
-  helper.getJWTFromUser = () => {}
+
+  helper.getJWTFromUser = (user) => {
+    return jwtHelper.generateToken(user)
+  }
+
   helper.getJWTFromUserQuery = (query) => {
     return new Promise(async (resolve, reject) => {
       const user = await helper.getAuthorizedUser(query)
