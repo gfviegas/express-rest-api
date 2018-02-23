@@ -1,11 +1,15 @@
 module.exports = (Model) => {
-  return (req, res) => {
-    const query = {_id: req.params.id}
-    const mod = req.body
-    Model.findOneAndUpdate(query, {$set: mod}, {new: true}, (err, data) => {
-      if (err) throw err
+  return async (req, res) => {
+    try {
+      const mod = req.body
+      let entity = await Model.findById(req.params.id).exec()
+      if (!entity) return res.status(404).json()
+      entity = Object.assign(entity, mod)
 
-      res.status(200).json(data)
-    })
+      await entity.save()
+      return res.status(200).json(entity)
+    } catch (e) {
+      throw e
+    }
   }
 }

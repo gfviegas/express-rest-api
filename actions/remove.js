@@ -1,11 +1,13 @@
 module.exports = (Model) => {
-  return (req, res) => {
-    const query = {_id: req.params.id}
-    // É multi: true CUIDADO!
-    Model.remove(query, (err, data) => {
-      if (err) throw err
+  return async (req, res) => {
+    try {
+      const entity = await Model.findById(req.params.id)
+      if (!entity) return res.status(404).json()
 
+      entity.remove()
       res.status(204).json()
-    })
+    } catch (e) {
+      throw e
+    }
   }
 }
