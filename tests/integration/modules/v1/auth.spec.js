@@ -17,14 +17,14 @@ describe(ENDPOINT, () => {
   let someUser, someUserData, someUserToken, someUserHeader
 
   before(async () => {
-    someUserData = {username: 'test0', name: 'test', email: 'test0@test.com', password: 'test', active: true}
+    someUserData = {username: 'testAuth', name: 'test', email: 'testAuth@test.com', password: 'test', active: true}
     someUser = await Model.create(someUserData)
     someUserToken = auth.getJWTFromUser(someUser)
     someUserHeader = {authorization: `Bearer ${someUserToken}`}
   })
 
   after(async () => {
-    Model.remove({username: 'test0'})
+    Model.remove({username: 'testAuth'})
   })
 
   describe('POST /', () => {

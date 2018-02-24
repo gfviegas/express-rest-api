@@ -122,29 +122,36 @@ describe('Module User: Validators', () => {
 
   describe('Method Update', () => {
     beforeEach(() => {
+      req['body'] = {email: '2--01', password: 'abcde', username: 'a', active: 'NOT A BOOLEAN', name: 'asd'}
       validators.update(req, request.res, () => {})
     })
     it('should be a function', () => {
       expect(validators.update).to.be.a('function')
     })
-    // it('should call checkBody 4 times', () => {
-    //   expect(checkBody.called).to.equal(true)
-    //   expect(checkBody.callCount).to.equal(4)
-    // })
-    // it('should call len 2 times', () => {
-    //   expect(len.called).to.equal(true)
-    //   expect(len.callCount).to.equal(2)
-    // })
-    // it('should call isEmail once', () => {
-    //   expect(isEmail.called).to.equal(true)
-    //   expect(isEmail.callCount).to.equal(1)
-    // })
-    // it('should verify name length', () => {
-    //   expect(checkBody.calledWith('name', {error: 'length', min: 4, max: 20})).to.equal(true)
-    // })
-    // it('should verify email valid', () => {
-    //   expect(checkBody.calledWith('email', {error: 'invalid'})).to.equal(true)
-    // })
+    it('should call checkBody 5 times', () => {
+      expect(checkBody.called).to.equal(true)
+      expect(checkBody.callCount).to.equal(5)
+    })
+    it('should call len 3 times', () => {
+      expect(len.called).to.equal(true)
+      expect(len.callCount).to.equal(3)
+    })
+    it('should call isEmail once', () => {
+      expect(isEmail.called).to.equal(true)
+      expect(isEmail.callCount).to.equal(1)
+    })
+    it('should verify username length', () => {
+      expect(checkBody.calledWith('username', {error: 'length', min: 4, max: 20})).to.equal(true)
+    })
+    it('should verify name length', () => {
+      expect(checkBody.calledWith('name', {error: 'length', min: 4, max: 20})).to.equal(true)
+    })
+    it('should verify password length', () => {
+      expect(checkBody.calledWith('password', {error: 'length', min: 6, max: 20})).to.equal(true)
+    })
+    it('should verify email valid', () => {
+      expect(checkBody.calledWith('email', {error: 'invalid'})).to.equal(true)
+    })
   })
 
   describe('Method Email', () => {

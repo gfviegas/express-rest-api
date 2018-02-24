@@ -76,6 +76,7 @@ module.exports = {
     if (req.body && req.body.name) req.checkBody('name', {error: 'length', min: 4, max: 20}).len(4, 20)
     if (req.body && req.body.email) req.checkBody('email', {error: 'invalid'}).isEmail()
     if (req.body && req.body.username) req.checkBody('username', {error: 'length', min: 4, max: 20}).len(4, 20)
+    if (req.body && req.body.password) req.checkBody('password', {error: 'length', min: 6, max: 20}).len(6, 20)
     if (req.body && req.body.active) req.checkBody('active', {error: 'invalid'}).isBoolean()
     handleValidation(req, res, next)
   },
