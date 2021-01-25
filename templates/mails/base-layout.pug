@@ -1,177 +1,190 @@
-doctype html
-html(lang='en')
+doctype strict
+html(xmlns='http://www.w3.org/1999/xhtml')
   head
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='x-apple-disable-message-reformatting')
-    title
-    //if mso
-      style.
-        * {
-        font-family: sans-serif !important;
-        }
-    // [if !mso] <!
-    // <![endif]
-    style.
-      /* What it does: Remove spaces around the email design added by some email clients. */
-      /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
-      html,
+    meta(http-equiv='Content-Type' content='text/html; charset=utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    style(type='text/css').
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+      #outlook a {
+      padding: 0;
+      }
       body {
-      margin: 0 auto !important;
-      padding: 0 !important;
-      height: 100% !important;
       width: 100% !important;
-      }
-      /* What it does: Stops email clients resizing small text. */
-      * {
-      -ms-text-size-adjust: 100%;
       -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+      font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
       }
-      /* What it does: Centers email on Android 4.4 */
-      div[style*="margin: 16px 0"] {
-      margin:0 !important;
+      .ExternalClass {
+      width: 100%;
       }
-      /* What it does: Stops Outlook from adding extra spacing to tables. */
-      table,
-      td {
-      mso-table-lspace: 0pt !important;
-      mso-table-rspace: 0pt !important;
+      .ExternalClass,
+      .ExternalClass p,
+      .ExternalClass span,
+      .ExternalClass font,
+      .ExternalClass td,
+      .ExternalClass div {
+      line-height: 100%;
       }
-      /* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
-      table {
-      border-spacing: 0 !important;
-      border-collapse: collapse !important;
-      table-layout: fixed !important;
-      margin: 0 auto !important;
+      #backgroundTable {
+      margin: 0;
+      padding: 0;
+      width: 100% !important;
+      line-height: 100% !important;
       }
-      table table table {
-      table-layout: auto;
-      }
-      /* What it does: Uses a better rendering method when resizing images in IE. */
       img {
-      -ms-interpolation-mode:bicubic;
+      outline: none;
+      text-decoration: none;
+      -ms-interpolation-mode: bicubic;
       }
-      /* What it does: A work-around for iOS meddling in triggered links. */
-      *[x-apple-data-detectors] {
-      color: inherit !important;
-      text-decoration: none !important;
+      a img {
+      border: none;
       }
-      /* What it does: A work-around for Gmail meddling in triggered links. */
-      .x-gmail-data-detectors,
-      .x-gmail-data-detectors *,
-      .aBn {
-      border-bottom: 0 !important;
-      cursor: default !important;
+      .image_fix {
+      display: block;
       }
-      /* What it does: Prevents Gmail from displaying an download button on large, non-linked images. */
-      .a6S {
-      display: none !important;
-      opacity: 0.01 !important;
+      p {
+      margin: 1em 0;
+      line-height: 1.5;
       }
-      /* If the above doesn't work, add a .g-img class to any image in question. */
-      img.g-img + div {
-      display:none !important;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+      color: black !important;
       }
-      /* What it does: Prevents underlining the button text in Windows 10 */
-      .button-link {
-      text-decoration: none !important;
+      h1 a,
+      h2 a,
+      h3 a,
+      h4 a,
+      h5 a,
+      h6 a {
+      color: blue !important;
       }
-      /* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
-      /* Create one of these media queries for each additional viewport size you'd like to fix */
-      /* Thanks to Eric Lepetit @ericlepetitsf) for help troubleshooting */
-      @media only screen and (min-device-width: 375px) and (max-device-width: 413px) { /* iPhone 6 and 6+ */
-      .email-container {
-      min-width: 375px !important;
+      h1 a:active,
+      h2 a:active,
+      h3 a:active,
+      h4 a:active,
+      h5 a:active,
+      h6 a:active {
+      color: red !important;
       }
+      h1 a:visited,
+      h2 a:visited,
+      h3 a:visited,
+      h4 a:visited,
+      h5 a:visited,
+      h6 a:visited {
+      color: purple !important;
       }
-    //if gte mso 9
-      xml
-        o:officedocumentsettings
-          o:allowpng
-            o:pixelsperinch 96
-    style.
-      /* What it does: Hover styles for buttons */
-      .button-td,
-      .button-a {
-      transition: all 100ms ease-in;
+      table td {
+      border-collapse: collapse;
       }
-      .button-td:hover,
-      .button-a:hover {
-      background: #555555 !important;
-      border-color: #555555 !important;
+      table {
+      border-collapse: collapse;
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
       }
-      /* Media Queries */
-      @media screen and (max-width: 480px) {
-      /* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
-      .fluid {
-      width: 100% !important;
-      max-width: 100% !important;
-      height: auto !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
+      a {
+      color: orange;
       }
-      /* What it does: Forces table cells into full-width rows. */
-      .stack-column,
-      .stack-column-center {
-      display: block !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      direction: ltr !important;
+      @media only screen and (max-device-width: 480px) {
+      a[href^="tel"],
+      a[href^="sms"] {
+      text-decoration: none;
+      color: black;
+      pointer-events: none;
+      cursor: default;
       }
-      /* And center justify these ones. */
-      .stack-column-center {
-      text-align: center !important;
-      }
-      /* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
-      .center-on-narrow {
-      text-align: center !important;
-      display: block !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      float: none !important;
-      }
-      table.center-on-narrow {
-      display: inline-block !important;
+      .mobile_link a[href^="tel"],
+      .mobile_link a[href^="sms"] {
+      text-decoration: default;
+      color: orange !important;
+      pointer-events: auto;
+      cursor: default;
       }
       }
-      .text-left {
-        text-align: left!important;
+      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+      a[href^="tel"],
+      a[href^="sms"] {
+      text-decoration: none;
+      color: blue;
+      pointer-events: none;
+      cursor: default;
       }
-  body(width='100%', bgcolor='#222222', style='margin: 0; mso-line-height-rule: exactly;')
-    center(style='width: 100%; background: #ddd; text-align: left;')
-      div(style='display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;') Esta é uma mensagem automática, não sendo necessário respondê-la. -
-      .email-container(style='max-width: 680px; margin: auto;')
-        //if mso
-          table(role='presentation', aria-hidden='true', cellspacing='0', cellpadding='0', border='0', width='680', align='center')
-            tr
-              td
-        table(role='presentation', aria-hidden='true', cellspacing='0', cellpadding='0', border='0', align='center', width='100%', style='max-width: 680px;')
-          tr
-            td(style='padding: 20px 0; text-align: center')
-              img(src=_email.logo, aria-hidden='true', width='200', height='50', alt='Logo I9xp', border='0', style='height: auto; background: #dddddd; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555; width: 25%;')
-        table(role='presentation', aria-hidden='true', cellspacing='0', cellpadding='0', border='0', align='center', width='100%', style='max-width: 680px;')
-          tr
-            block banner
-          tr
-            block content
-          tr
-            td(height='40', style='font-size: 0; line-height: 0;')  &nbsp;
-          tr
-            td(bgcolor='#ffffff')
-              table(role='presentation', aria-hidden='true', cellspacing='0', cellpadding='0', border='0', width='100%')
+      .mobile_link a[href^="tel"],
+      .mobile_link a[href^="sms"] {
+      text-decoration: default;
+      color: orange !important;
+      pointer-events: auto;
+      cursor: default;
+      }
+      }
+      @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+      }
+      @media only screen and (-webkit-device-pixel-ratio: 0.75) {
+      }
+      @media only screen and (-webkit-device-pixel-ratio: 1) {
+      }
+      @media only screen and (-webkit-device-pixel-ratio: 1.5) {
+      }
+      .header {
+      background-color: #006800;
+      padding: 25px;
+      }
+      .header img {
+      max-width: 100%;
+      }
+      .footer {
+      background-color: #002f23;
+      padding: 1rem;
+      color: white;
+      font-size: 12px;
+      }
+  body
+    table#backgroundTable(cellspacing='0' cellpadding='0' border='0')
+      tbody
+        tr
+          td
+            table(style='max-width: 600px; width: 100%' cellspacing='0' cellpadding='0' border='0' align='center')
+              tbody
                 tr
-                  td(style='padding: 40px; font-family: sans-serif; font-size: 15px; line-height: 20px; color: #555555;')
-                    block warning-message
-                      span Esta é uma mensagem automática, não sendo necessário respondê-la. #[br]
-                      //- span Caso trate de solicitação que você não fez, desconsidere este email.
-        table(role='presentation', aria-hidden='true', cellspacing='0', cellpadding='0', border='0', align='center', width='100%', style='max-width: 680px;')
-          tr
-            td.x-gmail-data-detectors(style='padding: 40px 10px;width: 100%;font-size: 12px; font-family: sans-serif; line-height:18px; text-align: center; color: #888888;')
-              br
-              br
-              | #[a(href=_email.base_url) #{_email.base_name}]
-              br
-              | #[a(href=`mailto: ${_email.contact.email}`) #{_email.contact.email}]
-              br
-        //if mso
+                  td.header(align='center')
+                    img(src=`${imgPath}/logo_header.svg` alt='Via Varejo Marketplace')
+                tr
+                  td(style='font-size: 20px; color: #006800; padding: 20px 1rem 0' align='center')
+                    table(style='max-width: 400px' cellspacing='0' cellpadding='0' border='0' align='center')
+                      tbody
+                        tr
+                          td(align='center')
+                            block header
+                tr
+                  td
+                    table(style='max-width: 500px; width: 100%' cellspacing='0' cellpadding='0' border='0' align='center')
+                      tbody
+                        tr
+                          td(style='height: 2px; background: #fede9e')
+                tr
+                  td(style='padding: 0 1rem')
+                    table(style='max-width: 400px' cellspacing='0' cellpadding='0' border='0' align='center')
+                      tbody
+                        tr
+                          td(style='font-weight: 500; font-size: 18px' align='center')
+                            block subheader
+                tr
+                  td
+                    block content
+                tr
+                  td(style='padding: 2rem' align='center')
+                    img(style='max-width: 100%' src=`${imgPath}/logo-mktp-vertical.svg` alt='Via Varejo Marketplace')
+                tr
+                  td.footer(align='center')
+                    p(style='max-width: 400px')
+                      | Via Varejo S.A, - CNPJ: 33.041.260/ 0652.90 Rua João Pessoa,
+                      | nº 83, Centro, São Caetano do Sul, SP - Cep: 09520-010

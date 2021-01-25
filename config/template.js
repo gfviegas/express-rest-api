@@ -1,12 +1,9 @@
 const email = {
-  base_url: process.env.SITE_URL,
-  admin_url: process.env.ADMIN_URL,
-  base_name: process.env.ADMIN_URL,
-  contact: {
-    email: process.env.CONTACT_EMAIL
-  },
-  logo: `${process.env.ASSETS_URL}img/logo.png`,
-  imgPath: `${process.env.ASSETS_URL}img/`
+  base_url: process.env.FRONT_URL,
+  admin_url: process.env.BACKOFFICE_URL,
+  base_name: process.env.BACKOFFICE_URL,
+  logo: `${process.env.ASSETS_URL}/img/logo.png`,
+  imgPath: `${process.env.ASSETS_URL}/img`
 }
 
 const configure = (app) => {
@@ -17,6 +14,6 @@ const configure = (app) => {
 }
 
 module.exports = {
-  email: email,
-  configure: configure
+  email,
+  configure
 }

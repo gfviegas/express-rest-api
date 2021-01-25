@@ -1,0 +1,189 @@
+doctype strict
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    meta(http-equiv='Content-Type' content='text/html; charset=utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    style(type='text/css').
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+      #outlook a {
+      padding: 0;
+      }
+      body {
+      width: 100% !important;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+      font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+      }
+      .ExternalClass {
+      width: 100%;
+      }
+      .ExternalClass,
+      .ExternalClass p,
+      .ExternalClass span,
+      .ExternalClass font,
+      .ExternalClass td,
+      .ExternalClass div {
+      line-height: 100%;
+      }
+      #backgroundTable {
+      margin: 0;
+      padding: 0;
+      width: 100% !important;
+      line-height: 100% !important;
+      }
+      img {
+      outline: none;
+      text-decoration: none;
+      -ms-interpolation-mode: bicubic;
+      }
+      a img {
+      border: none;
+      }
+      .image_fix {
+      display: block;
+      }
+      p {
+      margin: 1em 0;
+      line-height: 1.5;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+      color: black !important;
+      }
+      h1 a,
+      h2 a,
+      h3 a,
+      h4 a,
+      h5 a,
+      h6 a {
+      color: blue !important;
+      }
+      h1 a:active,
+      h2 a:active,
+      h3 a:active,
+      h4 a:active,
+      h5 a:active,
+      h6 a:active {
+      color: red !important;
+      }
+      h1 a:visited,
+      h2 a:visited,
+      h3 a:visited,
+      h4 a:visited,
+      h5 a:visited,
+      h6 a:visited {
+      color: purple !important;
+      }
+      table td {
+      border-collapse: collapse;
+      }
+      table {
+      border-collapse: collapse;
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+      }
+      a {
+      color: orange;
+      }
+      @media only screen and (max-device-width: 480px) {
+      a[href^="tel"],
+      a[href^="sms"] {
+      text-decoration: none;
+      color: black;
+      pointer-events: none;
+      cursor: default;
+      }
+      .mobile_link a[href^="tel"],
+      .mobile_link a[href^="sms"] {
+      text-decoration: default;
+      color: orange !important;
+      pointer-events: auto;
+      cursor: default;
+      }
+      }
+      @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+      a[href^="tel"],
+      a[href^="sms"] {
+      text-decoration: none;
+      color: blue;
+      pointer-events: none;
+      cursor: default;
+      }
+      .mobile_link a[href^="tel"],
+      .mobile_link a[href^="sms"] {
+      text-decoration: default;
+      color: orange !important;
+      pointer-events: auto;
+      cursor: default;
+      }
+      }
+      @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+      }
+      @media only screen and (-webkit-device-pixel-ratio: 0.75) {
+      }
+      @media only screen and (-webkit-device-pixel-ratio: 1) {
+      }
+      @media only screen and (-webkit-device-pixel-ratio: 1.5) {
+      }
+      .header {
+      background-color: #006800;
+      padding: 25px;
+      }
+      .header img {
+      max-width: 100%;
+      }
+      .footer {
+      background-color: #002f23;
+      padding: 1rem;
+      color: white;
+      font-size: 12px;
+      }
+  body
+    table#backgroundTable(cellspacing='0' cellpadding='0' border='0')
+      tbody
+        tr
+          td
+            table(style='max-width: 600px; width: 100%' cellspacing='0' cellpadding='0' border='0' align='center')
+              tbody
+                tr
+                  td.header(align='center')
+                    img(src=`${_email.imgPath}/logo-slrs-horizontal-branco.svg` alt='Via Varejo Sellers Onboarding')
+                tr
+                  td(style='font-size: 20px; color: #006800; padding: 20px 1rem 0' align='center')
+                    table(style='max-width: 400px' cellspacing='0' cellpadding='0' border='0' align='center')
+                      tbody
+                        tr
+                          td(align='center')
+                            block header
+                tr
+                  td
+                    table(style='max-width: 500px; width: 100%' cellspacing='0' cellpadding='0' border='0' align='center')
+                      tbody
+                        tr
+                          td(style='height: 2px; background: #fede9e')
+                tr
+                  td(style='padding: 0 1rem')
+                    table(style='max-width: 400px' cellspacing='0' cellpadding='0' border='0' align='center')
+                      tbody
+                        tr
+                          td(style='font-weight: 500; font-size: 18px' align='center')
+                            block subheader
+                tr
+                  td
+                    block content
+                tr
+                  td(style='padding: 2rem' align='center')
+                    img(style='max-width: 100%' src=`${_email.imgPath}/logo-mktp-vertical.svg` alt='Via Varejo Marketplace')
+                tr
+                  td.footer(align='center')
+                    p(style='max-width: 400px')
+                      | Via Varejo S.A. - CNPJ: 33.041.260/0652-90 - Rua Samuel Klein, 98 - Centro - São Caetano do Sul - SP, 09510-125

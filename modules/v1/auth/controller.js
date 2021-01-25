@@ -2,7 +2,7 @@ const rfr = require('rfr')
 const actionsPath = './actions/'
 const Model = require('../user/model').model
 const extend = require('extend')
-const mailer = rfr('helpers/mailer')
+const mailer = rfr('helpers/mail')
 const jwtHelper = rfr('helpers/jwt')
 
 const controllerActions = {}
