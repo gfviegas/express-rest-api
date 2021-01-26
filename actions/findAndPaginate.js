@@ -1,29 +1,32 @@
-module.exports = (model) => {
-  return (req, res) => {
-    const query = {}
+const rfr = require('rfr')
+const { createQueryObject, parseSortParam } = rfr('helpers/request')
+
+module.exports = (Model) => {
+  return async (req, res) => {
+    const { filter } = res.locals
+
+    const query = filter || createQueryObject(req)
+
     const pagOptions = {
-      page: (req.query.page - 1) || 0,
-      limit: req.query.limit || 15
+      page: (Number.parseInt(req.query.page) - 1) || 0,
+      limit: Number.parseInt(req.query.limit) || 15,
+      sort: parseSortParam(req.query.sort) || { created_at: 'desc' }
     }
 
-    const operation = model.find(query)
+    const count = await Model.find(query).count()
     const meta = {
-      meta: {
-        currentPage: pagOptions.page,
-        limit: pagOptions.limit,
-        totalPages: Math.ceil(operation.count() / pagOptions.limit)
-      }
+      currentPage: (pagOptions.page + 1),
+      limit: pagOptions.limit,
+      totalPages: Math.ceil(count / pagOptions.limit),
+      count
     }
-
-    operation
-      .sort({'created_at': '-1'})
+    const resources = await Model.find(query)
       .skip(pagOptions.page * pagOptions.limit)
       .limit(pagOptions.limit)
-      .exec((err, data) => {
-        if (err) throw err
+      .sort(pagOptions.sort)
+      .collation({ locale: 'pt', numericOrdering: true })
 
-        const response = Object.assign(data, meta)
-        res.status(200).json(response)
-      })
+    const response = { resources, meta }
+    return res.status(200).json(response)
   }
 }

@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/gfviegas/scout-cms.svg?branch=master)](https://travis-ci.org/gfviegas/express-rest-api)
 [![Dependency Status](https://gemnasium.com/badges/github.com/gfviegas/express-rest-api.svg)](https://gemnasium.com/github.com/gfviegas/express-rest-api)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-# API RESTful em Express, Mongoose, Mocha e Chai.
+# API Backoffice.
 
 # Scripts
 
@@ -22,7 +22,7 @@ Os seguintes scripts estão disponiveis com `yarn run SCRIPT` ou `npm run SCRIPT
 | test:unit-server | Inicia o servidor de desenvolvimento dos testes unitários, com auto-reload |
 | test:report | Gera o relatório de cobertura dos testes |
 
-# Sobre este boilerplate
+# Sobre este projeto
 
 ## Organização de Pastas
 Vamos seguir um padrão de organização de pastas para ficar cada coisa em seu lugar e clean.
@@ -37,6 +37,9 @@ A pasta config abriga os scripts pra inicializar o server e a conexão do mongoo
 
 ### ./actions
 Sabe aquele GET `api/v1/module` que só tem a função de dar um GET da entidade e retornar? Muitas vezes você vai utilizar métodos que são idênticos em múltiplos models. É pra isso que essa folder existe. Ela abriga pequenas **ações** reaproveitáveis ao invés de poluir os controllers com códigos iguais. Utilize quantas e quais sentir necessidade, a maioria das vezes serão operações com o mongoose.
+
+### ./models
+Pasta para armazenar as models
 
 ### ./helpers
 Coloque aqui os arquivos helpers, funcões modularizadas que vão facilitar a manutenção do seu código. Diferente do actions as funções aqui abrigadas não tem relação com controllers, elas podem fazer simples operações como criptografar uma string ou calcular uma média.
@@ -61,9 +64,6 @@ Para cada módulo nós vamos possuir os seguintes files:
 
 #### controller.js
 Quando cairmos nas rotas, o que a API deve fazer? Essa responsabilidade é de nosso controller, que vai utilizar actions comuns do mongoose e/ou outros métodos que você vai cadastrar nesse file.
-
-#### model.js
-Auto-explicativo. Defina aqui o schema e model do mongoose de seu module, se tiver algum.
 
 #### validators.js
 Você diversas vezes vai precisar validar parâmetros de criação e edição de dados, além de algumas lógicas customizadas (Ex: não pode possuir mais de uma moto vermelha no sistema). É aqui que você vai criar essas validações. Elas rodam no formato de middleware do express, o que significa que a sua rota só vai chegar ao controller se passar no validator cadastrado.

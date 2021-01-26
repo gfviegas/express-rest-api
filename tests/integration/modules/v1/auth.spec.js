@@ -17,34 +17,34 @@ describe(ENDPOINT, () => {
   let someUser, someUserData, someUserToken, someUserHeader
 
   before(async () => {
-    someUserData = {username: 'testAuth', name: 'test', email: 'testAuth@test.com', password: 'test', active: true}
+    someUserData = { username: 'testAuth', name: 'test', email: 'testAuth@test.com', password: 'test', active: true }
     someUser = await Model.create(someUserData)
     someUserToken = auth.getJWTFromUser(someUser)
-    someUserHeader = {authorization: `Bearer ${someUserToken}`}
+    someUserHeader = { authorization: `Bearer ${someUserToken}` }
   })
 
   after(async () => {
-    Model.remove({username: 'testAuth'})
+    Model.remove({ username: 'testAuth' })
   })
 
   describe('POST /', () => {
     let userCredentials
 
     before(async () => {
-      userCredentials = {username: someUserData.username, password: someUserData.password}
+      userCredentials = { username: someUserData.username, password: someUserData.password }
     })
 
     it('should validate required params', async () => {
       const expectedMessage = {
-        password: {msg: {error: 'required'}},
-        username: {msg: {error: 'required'}}
+        password: { msg: { error: 'required' } },
+        username: { msg: { error: 'required' } }
       }
 
       const res = await request(app)
         .post(ENDPOINT)
         .send({})
 
-      expect(res.type).to.equal(`application/json`)
+      expect(res.type).to.equal('application/json')
       expect(res.body).to.shallowDeepEqual(expectedMessage)
       expect(res.status).to.equal(422)
     })
@@ -54,7 +54,7 @@ describe(ENDPOINT, () => {
         .post(ENDPOINT)
         .send(userCredentials)
 
-      expect(res.type).to.equal(`application/json`)
+      expect(res.type).to.equal('application/json')
       expect(res.body).to.be.an('object')
       expect(res.body).to.contain.all.keys(['token'])
       expect(res.status).to.equal(200)
@@ -63,12 +63,12 @@ describe(ENDPOINT, () => {
 
   describe('GET /', () => {
     it('should not accept unauthenticated request', async () => {
-      const expectedMessage = {error: 'no_token'}
+      const expectedMessage = { error: 'no_token' }
       const res = await request(app)
         .get(ENDPOINT)
         .expect(401)
 
-      expect(res.type).to.equal(`application/json`)
+      expect(res.type).to.equal('application/json')
       expect(res.body).to.deep.equal(expectedMessage)
     })
 
@@ -78,7 +78,7 @@ describe(ENDPOINT, () => {
         .set(someUserHeader)
         .expect(200)
 
-      expect(res.type).to.equal(`application/json`)
+      expect(res.type).to.equal('application/json')
     })
 
     it('should return valid data', async () => {
@@ -87,16 +87,16 @@ describe(ENDPOINT, () => {
         .set(someUserHeader)
         .expect(200)
 
-      expect(res.type).to.equal(`application/json`)
+      expect(res.type).to.equal('application/json')
       expect(res.body).to.be.an('object')
       expect(res.body).to.contain.all.keys(['_id', 'updated_at', 'created_at', 'name', 'email', 'username', 'active'])
       expect(res.body.username).to.equal(someUser.username)
     })
 
     it('should validate if token is expired', async () => {
-      const payload = {sub: someUser.id, data: {name: someUser.name}, iat: 1437018582}
-      const expiredToken = jwtHelper.sign(payload, process.env.APP_SECRET, {expiresIn: 1})
-      const hackedHeader = {authorization: `Bearer ${expiredToken}`}
+      const payload = { sub: someUser.id, data: { name: someUser.name }, iat: 1437018582 }
+      const expiredToken = jwtHelper.sign(payload, process.env.APP_SECRET, { expiresIn: 1 })
+      const hackedHeader = { authorization: `Bearer ${expiredToken}` }
 
       const clock = sinon.useFakeTimers(1437018582)
       await clock.tick(1437018650000)
@@ -106,33 +106,33 @@ describe(ENDPOINT, () => {
         .set(hackedHeader)
         .expect(403)
 
-      expect(res.type).to.equal(`application/json`)
+      expect(res.type).to.equal('application/json')
       expect(res.body).to.be.an('object')
       expect(res.body).to.contain.all.keys(['error'])
       expect(res.body.error).to.equal('token_expired')
     })
 
     it('should validate if token signature is invalid', async () => {
-      const hackedHeader = {authorization: `${someUserHeader.authorization}Aa + aa`}
+      const hackedHeader = { authorization: `${someUserHeader.authorization}Aa + aa` }
       const res = await request(app)
         .get(ENDPOINT)
         .set(hackedHeader)
         .expect(401)
 
-      expect(res.type).to.equal(`application/json`)
+      expect(res.type).to.equal('application/json')
       expect(res.body).to.be.an('object')
       expect(res.body).to.contain.all.keys(['error'])
       expect(res.body.error).to.equal('invalid_signature')
     })
 
     it('should validate if token is malformed', async () => {
-      const hackedHeader = {authorization: `Bearer ${someUserHeader.authorization}A`}
+      const hackedHeader = { authorization: `Bearer ${someUserHeader.authorization}A` }
       const res = await request(app)
         .get(ENDPOINT)
         .set(hackedHeader)
         .expect(401)
 
-      expect(res.type).to.equal(`application/json`)
+      expect(res.type).to.equal('application/json')
       expect(res.body).to.be.an('object')
       expect(res.body).to.contain.all.keys(['error'])
       expect(res.body.error).to.equal('jwt_malformed')

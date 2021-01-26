@@ -13,10 +13,10 @@ module.exports = (Model) => {
   }
 
   helper.getJWTFromUserQuery = (query) => {
-    return new Promise(async (resolve, reject) => {
+    return async (resolve, _reject) => {
       const user = await helper.getAuthorizedUser(query)
       return resolve(jwtHelper.generateToken(user))
-    })
+    }
   }
 
   return helper
