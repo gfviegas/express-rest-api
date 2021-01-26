@@ -42,6 +42,8 @@ public/files/**/*
 !public/**/no_image.*
 tmp/*
 deploy.sh
+.vscode
+.idea
 
 
 
