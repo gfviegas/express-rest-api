@@ -15,7 +15,7 @@ module.exports = {
   env: {
     node: true,
     mongo: true,
-    mocha: true
+    jest: true
   },
   globals: {
     APIError: true

@@ -1,10 +1,10 @@
 const rfr = require('rfr')
 const mongoose = require('mongoose')
 const logger = rfr('helpers/logger')
-require('./chai')()
 
 process.env.NODE_ENV = 'test'
-const app = rfr('./index')
+
+const app = require('./server_test')
 
 const dropDB = async () => {
   if (mongoose.connection.name !== process.env.DB_HOST_TEST.split('/')[3]) {
@@ -20,7 +20,7 @@ const dropDB = async () => {
   logger.info('[INFO] - DB Dropped! \n')
 }
 
-before(async () => {
+beforeAll(async () => {
   const res = await dropDB()
   if (res) logger.info(res)
 })

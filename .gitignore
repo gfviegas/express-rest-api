@@ -49,3 +49,6 @@ deploy.sh
 
 !.gitkeep
 !**/.gitkeep
+
+# Report coverage
+teste_coverage_report
