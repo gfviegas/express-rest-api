@@ -21,7 +21,7 @@ const customMethods = {
       .findById(jwtHelper.getUserId(req), (err, data) => {
         if (err) throw err
 
-        if (!data) return res.status(404).json()
+        if (!data) return res.status(404).json({ error: 'user_not_found' })
         if (!data.active) return res.status(403).json({error: 'user_inactive'})
 
         res.json(data)
