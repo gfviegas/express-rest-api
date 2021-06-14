@@ -1,16 +1,14 @@
-const request = require('request-promise')
+const axios = require('axios')
 
 const recache = (url) => {
-  const options = {
-    method: 'POST',
-    uri: 'http://api.prerender.io/recache',
-    body: {
+  return axios({
+    method: 'post',
+    url: 'http://api.prerender.io/recache',
+    data: {
       prerenderToken: process.env.PRERENDER_TOKEN,
       url: url
-    },
-    json: true
-  }
-  return request('http://api.prerender.io/recache', options)
+    }
+  });
 }
 
 module.exports = {
