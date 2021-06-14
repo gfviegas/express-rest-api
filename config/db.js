@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
-const options = {}
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
+}
 
 if (process.env.NODE_ENV === 'test') {
   mongoose.connect(process.env.DB_HOST_TEST, options)

@@ -3,7 +3,7 @@ const bytes = require('bytes')
 const concat = require('concat-stream')
 const debug = require('debug')('busboy-body-parser')
 
-var HARDLIMIT = bytes('250mb')
+const HARDLIMIT = bytes('250mb')
 
 module.exports = function (settings) {
   settings = settings || {}
@@ -23,7 +23,7 @@ module.exports = function (settings) {
 
   return function multipartBodyParser (req, res, next) {
     if (req.is('multipart/form-data')) {
-      var busboy
+      let busboy
       try {
         busboy = new Busboy({
           headers: req.headers,
@@ -50,7 +50,7 @@ module.exports = function (settings) {
       })
       busboy.on('file', function (key, file, name, enc, mimetype) {
         file.pipe(concat(function (d) {
-          var fileData = {
+          const fileData = {
             data: file.truncated ? null : d,
             name: name,
             encoding: enc,
@@ -69,7 +69,7 @@ module.exports = function (settings) {
           }
         }))
       })
-      var error
+      let error
       busboy.on('error', function (err) {
         debug('Error parsing form')
         debug(err)

@@ -1,0 +1,4 @@
+FROM public.ecr.aws/h2u7f9u5/node:14.15.3
+
+WORKDIR /var/www/app
+CMD bash -c 'yarn && yarn run dev'

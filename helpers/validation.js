@@ -1,17 +1,9 @@
-const handleValidation = (req, res, next) => {
-  return req.getValidationResult()
-    .then((result) => {
-      if (!result.isEmpty()) {
-        let errors = result.mapped()
-        res.status(422).json(errors)
-        return false
-      } else {
-        next()
-      }
-    })
-    .catch((error) => {
-      throw error
-    })
+const handleValidation = async (req, res, next) => {
+  const result = await req.getValidationResult()
+
+  if (result.isEmpty()) return next()
+  const errors = result.mapped()
+  return next(new APIError(errors, 422))
 }
 
 module.exports = handleValidation
