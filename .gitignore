@@ -42,8 +42,13 @@ public/files/**/*
 !public/**/no_image.*
 tmp/*
 deploy.sh
+.vscode
+.idea
 
 
 
 !.gitkeep
 !**/.gitkeep
+
+# Report coverage
+teste_coverage_report

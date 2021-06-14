@@ -6,43 +6,77 @@ const chalk = require('chalk')
 const error = chalk.bold.red
 const success = chalk.bold.green
 const info = chalk.bold.blue
+const warning = chalk.bold.yellow
 
-const seedSetup = () => {
-  console.log(info('\n**** Seeding Setup... ****\n'))
-  const model = rfr('modules/v1/setup/model').model
-  const data = require('./setup')
+const availableSeeds = ['backoffice_role', 'backoffice_user', 'process_average_time', 'checkpoint', 'sellers_overview_report']
+const options = { production: false, drop: false }
 
-  return seeder.clearAndSeed(model, data)
+const seedResource = async (resource) => {
+  const resourceLabel = resource[0].toUpperCase() + resource.substring(1)
+  console.log(info(`\n**** Seeding ${resourceLabel}... ****`))
+  const Model = rfr(`models/${resource}`).model
+
+  const data = await require(`./data/${resource}`)(options.production)
+  if (!data) throw new Error(`No data provided for ${Model}.`)
+
+  const { inserted, skipped } = await seeder.seed(Model, data, options)
+  console.log(warning(`**** ${inserted} inserted, ${skipped} skipped. ****\n`))
+  return inserted
+}
+const execute = async (resources) => {
+  const tasks = resources.map(r => async () => seedResource(r))
+
+  const results = await tasks.reduce(async (promiseChain, currentTask) => {
+    const chainResults = await promiseChain
+    const currentResult = await currentTask()
+    return [...chainResults, currentResult]
+  }, Promise.resolve([]))
+
+  return Promise.all(results)
 }
 
-const seedUsers = () => {
-  console.log(info('\n**** Seeding Users... ****\n'))
-  const model = rfr('modules/v1/user/model').model
-  const data = require('./user')
+// Connect and run seeds
+const connectAndRun = async (args) => {
+  try {
+    await seeder.connect()
+    console.log(success('**** DB connected sucessfully **** \n'))
 
-  return seeder.clearAndSeed(model, data)
+    if (args.includes('--drop')) {
+      options.drop = true
+      console.log(warning('\tDropping all the specified models from database..'))
+    }
+    if (args.includes('--production')) {
+      options.production = true
+      console.log(warning('\tSeeding production data only..'))
+    }
+
+    const resources = (args.includes('all')) ? [...availableSeeds] : args.filter(r => availableSeeds.includes(r))
+    if (!resources || !resources.length) {
+      console.log(error('\n ### No seed found matching the arguments!  ### \n'))
+      throw new Error('no_seed')
+    }
+
+    const response = await execute(resources)
+
+    console.log(success('\n ### All Seeds done!  ### \n'))
+    console.log(success(`\n ### ${response.length} seeds ran!  ### \n`))
+
+    return 0
+  } catch (e) {
+    console.error(e)
+    console.log(error(e))
+    return process.exit(1)
+  }
 }
 
-const execute = () => {
-  const funcs = [seedSetup(), seedUsers()]
-  return Promise.all(funcs)
+const runDirect = async () => {
+  const args = process.argv.slice(2)
+  const code = await connectAndRun(args)
+  process.exit(code)
 }
 
-seeder.connect().then(() => {
-  console.log(success('**** DB connected sucessfully **** \n'))
-  execute()
-    .then(response => {
-      let count = 0
-      response.forEach(() => count++)
-      console.log(success(`\n ### All Seeds done!  ### \n`))
-      console.log(success(`\n ### ${count} seeds ran!  ### \n`))
-      process.exit(0)
-    })
-    .catch(err => {
-      console.log(error(err))
-      process.exit(1)
-    })
-}).catch((err) => {
-  console.log(error(err))
-  process.exit(1)
-})
+if (require.main === module) {
+  runDirect()
+}
+
+exports.connectAndRun = connectAndRun
