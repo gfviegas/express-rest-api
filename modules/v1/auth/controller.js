@@ -2,7 +2,7 @@ const rfr = require('rfr')
 const actionsPath = './actions/'
 const Model = require('../user/model').model
 const extend = require('extend')
-const mailer = rfr('helpers/mailer')
+const mailer = rfr('helpers/mail')
 const jwtHelper = rfr('helpers/jwt')
 
 const controllerActions = {}
@@ -21,7 +21,7 @@ const customMethods = {
       .findById(jwtHelper.getUserId(req), (err, data) => {
         if (err) throw err
 
-        if (!data) return res.status(404).json()
+        if (!data) return res.status(404).json({ error: 'user_not_found' })
         if (!data.active) return res.status(403).json({error: 'user_inactive'})
 
         res.json(data)
