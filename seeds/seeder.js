@@ -2,29 +2,37 @@ const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
 const connect = () => {
-  return mongoose.connect(process.env.DB_HOST)
+  if (mongoose.connection.readyState) return
+
+  const { NODE_ENV, DB_HOST_TEST, DB_HOST } = process.env
+  return (NODE_ENV === 'test') ? mongoose.connect(DB_HOST_TEST) : mongoose.connect(DB_HOST)
 }
 
-const clearModel = (Model, cb) => {
-  return Model.remove(cb)
+const insert = async (Model, data) => {
+  try {
+    const result = await Model.create(data)
+    return (result) ? 'inserted' : 'skipped'
+  } catch (e) {
+    console.error(e)
+    return 'skipped'
+  }
 }
 
-const clearAndSeed = (Model, data) => {
-  return new Promise((resolve, reject) => {
-    Model.remove(err => {
-      if (err) throw err
-      Model.create(data).then(data => resolve(data)).catch(data => reject(data))
-    })
-  })
-}
+const seed = async (Model, data, options) => {
+  options = Object.assign({ drop: false }, options)
 
-const seed = (Model, data) => {
-  return Model.create(data)
+  if (options.drop) await Model.deleteMany({})
+  if (!data) throw new Error(`No data provided for ${Model}.`)
+
+  const insertions = data.map(data => insert(Model, data))
+  const response = await Promise.all(insertions)
+  const inserted = response.reduce((n, r) => n + (r === 'inserted'), 0)
+  const skipped = response.reduce((n, r) => n + (r === 'skipped'), 0)
+
+  return { inserted, skipped }
 }
 
 module.exports = {
   connect,
-  clearModel,
-  clearAndSeed,
   seed
 }

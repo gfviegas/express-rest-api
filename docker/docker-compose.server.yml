@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ../tmp/db:/data/db
+      - ../tmp/backups:/data/backups
+
+  mongo_data:
+    image: tianon/true
+    volumes:
+      - ../tmp/db:/data/db
+      - ../tmp/backups:/data/backups
+
+  api:
+    image: ${IMAGE_API}:${TAG}
+    ports:
+      - 3001:3000
+    depends_on:
+      - mongo
+
+  rabbit:
+    image: rabbitmq:3.8.9-management-alpine
+    environment:
+      RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRPCLNMEQG
+      RABBITMQ_DEFAULT_USER: develop
+      RABBITMQ_DEFAULT_PASS: develop@2020
+    ports:
+      - 5672:5672
+      - 15672:15672
