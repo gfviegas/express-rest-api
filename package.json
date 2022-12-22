@@ -40,7 +40,7 @@
     "express-validator": "5.0.1",
     "extend": "^3.0.0",
     "fb": "2.0.0",
-    "jsonwebtoken": "8.1.1",
+    "jsonwebtoken": "9.0.0",
     "moment": "2.20.1",
     "mongo-dot-notation": "^1.2.0",
     "mongoose": "5.0.6",
